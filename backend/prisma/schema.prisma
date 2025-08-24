@@ -1,0 +1,123 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id       String @id @default(uuid())
+  name     String
+  email    String @unique
+  password String
+
+  Events Events[]
+
+  @@map("users")
+}
+
+model Categories {
+  id   String @id @default(uuid())
+  name String
+
+  Musics Musics[]
+
+  @@map("categories")
+}
+
+model Types {
+  id   String @id @default(uuid())
+  name String
+
+  Types_Levites  Types_Levites[]
+  Events_Levites Events_Levites[]
+
+  @@map("types")
+}
+
+model Events {
+  id          String   @id @default(uuid())
+  name        String
+  date        DateTime
+  observation String?
+  id_user     String
+  create_at   DateTime @default(now())
+  update_at   DateTime @updatedAt
+
+  Users Users @relation(fields: [id_user], references: [id])
+
+  Events_Musics  Events_Musics[]
+  Events_Levites Events_Levites[]
+
+  @@map("events")
+}
+
+model Musics {
+  id             String @id @default(uuid())
+  title          String
+  url_image      String
+  link_CifraClub String
+  id_youtube     String
+  letter         String
+
+  id_category String
+  Categories  Categories @relation(fields: [id_category], references: [id])
+
+  Events_Musics Events_Musics[]
+
+  @@map("musics")
+}
+
+model Levites {
+  id   String @id @default(uuid())
+  name String
+
+  Types_Levites  Types_Levites[]
+  Events_Levites Events_Levites[]
+
+  @@map("levites")
+}
+
+model Types_Levites {
+  id        String @id @default(uuid())
+  id_type   String
+  id_levite String
+
+  Types   Types   @relation(fields: [id_type], references: [id])
+  Levites Levites @relation(fields: [id_levite], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("typesLevites")
+}
+
+model Events_Musics {
+  id       String @id @default(uuid())
+  id_music String
+  id_event String
+
+  Events Events @relation(fields: [id_event], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Musics Musics @relation(fields: [id_music], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("eventsMusics")
+}
+
+model Events_Levites {
+  id        String @id @default(uuid())
+  id_type   String
+  id_levite String
+  id_event  String
+
+  Events  Events  @relation(fields: [id_event], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Types   Types   @relation(fields: [id_type], references: [id])
+  Levites Levites @relation(fields: [id_levite], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@map("eventsLevites")
+}
