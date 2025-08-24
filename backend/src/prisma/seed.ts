@@ -15,6 +15,7 @@ async function main() {
             data: [
                 { name: "Adoração" },
                 { name: "Celebração" },
+                { name: "Oferta" }
             ],
             skipDuplicates: true,
         }),

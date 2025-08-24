@@ -1,4 +1,4 @@
-import { fastify } from 'fastify';
+
 import { FastifyTypedInstance } from './types'
 
 //CONTROLLER
@@ -12,12 +12,14 @@ import CreateLeviteController from './controller/Levites/CreateLeviteController'
 import ListLevitesController from './controller/Levites/ListLevitesController';
 import ListTypesController from './controller/Types/ListTypesController';
 import ListCategoriesController from './controller/Category/ListCategoriesController';
+import CreateEventController from './controller/Events/CreateEventController';
+import ListEventsController from './controller/Events/ListEventsController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
 import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/musics';
 import { CreateLeviteSchema } from './schemas/leivtes';
-
+import { CreateEventSchema } from './schemas/Events';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -111,4 +113,21 @@ export async function routes(app: FastifyTypedInstance) {
             description: 'List the all categories',
         }
     }, ListCategoriesController) // Required Token
+
+    //EVENTS
+    app.post('/event', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['EVENTS'],
+            security: [{ bearerAuth: [] }],
+            description: 'Create a new event',
+            body: CreateEventSchema
+        }
+    }, CreateEventController) // Required Token
+    app.get('/events', {
+        schema: {
+            tags: ['EVENTS'],
+            description: 'List the all Events',
+        }
+    }, ListEventsController) 
 }
