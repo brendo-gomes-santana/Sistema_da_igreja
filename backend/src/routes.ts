@@ -8,10 +8,13 @@ import CreateMusicController from './controller/Musics/CreateMusicController';
 import ListMusicController from './controller/Musics/ListMusicController';
 import UniqueMusicController from './controller/Musics/UniqueMusicController';
 import DeleteMusicController from './controller/Musics/DeleteMusicController';
+import CreateLeviteController from './controller/Levites/CreateLeviteController';
+import ListLeviteServer from './server/Levites/ListLeviteServer';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
 import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/musics';
+import { CreateLeviteSchema } from './schemas/leivtes';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -33,7 +36,7 @@ export async function routes(app: FastifyTypedInstance) {
         }
     }, CreateUserController) // Required Token
 
-    //Musics
+    //MUSICS
     app.post('/music', {
         onRequest: [app.authenticate],
         schema: {
@@ -43,7 +46,7 @@ export async function routes(app: FastifyTypedInstance) {
             body: CreateMusicSchema
         }
     }, CreateMusicController) // Required Token
-    app.get('/music', {
+    app.get('/musics', {
         schema: {
             tags: ['MUSIC'],
             description: 'list all musics',
@@ -66,4 +69,23 @@ export async function routes(app: FastifyTypedInstance) {
             params: UniqueMusicSchema
         }
     }, DeleteMusicController) // Required Token
+
+    //LEVITES
+    app.post('/levite', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LEVITE'],
+            description: 'Create a new Levite',
+            security: [{ bearerAuth: [] }],
+            body: CreateLeviteSchema
+        }
+    }, CreateLeviteController) // Required Token
+    app.get('/levites', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LEVITE'],
+            security: [{ bearerAuth: [] }],
+            description: 'List the all levites',
+        }
+    }, ListLeviteServer) // Required Token
 }
