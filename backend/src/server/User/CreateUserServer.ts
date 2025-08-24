@@ -6,9 +6,17 @@ import { CreateUser } from "../../schemas/users";
 
 type CreateUserType = z.infer<typeof CreateUser>
 
-export default async function CreateUserServer(body:CreateUserType){
+export default async function CreateUserServer(body: CreateUserType) {
 
-    const create = await prisma.users.create({
+    if (await prisma.users.findUnique({
+        where: {
+            email: body.email
+        }
+    })) {
+        throw new Error('User exist in System!')
+    }
+
+    return await prisma.users.create({
         data: {
             email: body.email,
             name: body.name,
@@ -20,7 +28,4 @@ export default async function CreateUserServer(body:CreateUserType){
             name: true
         }
     })
-
-    return create
-
 }

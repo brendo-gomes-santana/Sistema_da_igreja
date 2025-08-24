@@ -10,7 +10,8 @@ import { CreateUser, LoginUserSchema } from "./schemas/users";
 
 
 export async function routes(app: FastifyTypedInstance) {
-
+    
+    // USERS
     app.post('/login', {
         schema: {
             tags: ['USER'],
@@ -18,7 +19,6 @@ export async function routes(app: FastifyTypedInstance) {
             body: LoginUserSchema
         }
     }, LoginUserController)
-
     app.post('/user', {
         onRequest: [app.authenticate],
         schema: {
@@ -29,5 +29,6 @@ export async function routes(app: FastifyTypedInstance) {
         }
     }, CreateUserController)
 
+    
 
 }

@@ -9,7 +9,7 @@ export default async function CreateUserController(
 ) {
 
   try {
-    // validação do body com zod
+
     const body = CreateUser.parse(request.body);
     const create = await CreateUserServer(body);
 
