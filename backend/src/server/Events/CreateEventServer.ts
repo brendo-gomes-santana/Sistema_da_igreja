@@ -15,9 +15,18 @@ export default async function CreateEventServer(props: Props, id: string) {
             id_user: id,
             Events_Levites: {
                 createMany: {
-                    data: props.levitas?.map(item => ({
+                    data: props.levitas.map(item => ({
                         id_levite: item.id_levite,
                         id_type: item.id_type
+                    }))
+                }
+            },
+            Events_Musics: {
+                createMany: {
+                    data: props.musics?.map(itens => ({
+                        id_category: itens.id_category || undefined,
+                        order: itens.order || 0,
+                        id_music: itens.id_music
                     })) || []
                 }
             }

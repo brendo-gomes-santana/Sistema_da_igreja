@@ -14,12 +14,13 @@ import ListTypesController from './controller/Types/ListTypesController';
 import ListCategoriesController from './controller/Category/ListCategoriesController';
 import CreateEventController from './controller/Events/CreateEventController';
 import ListEventsController from './controller/Events/ListEventsController';
+import UniqueEventController from './controller/Events/UniqueEventController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
 import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/musics';
 import { CreateLeviteSchema } from './schemas/leivtes';
-import { CreateEventSchema } from './schemas/Events';
+import { CreateEventSchema, UniqueIdEventSchema } from './schemas/Events';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -129,5 +130,12 @@ export async function routes(app: FastifyTypedInstance) {
             tags: ['EVENTS'],
             description: 'List the all Events',
         }
-    }, ListEventsController) 
+    }, ListEventsController)
+    app.get('/event/:id', {
+        schema: {
+            tags: ['EVENTS'],
+            description: 'search the event detail',
+            params: UniqueIdEventSchema
+        }
+    }, UniqueEventController)
 }

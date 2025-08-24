@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify";
 import CreateEventServer from "../../server/Events/CreateEventServer";
 import { CreateEventSchema } from "../../schemas/Events";
+
 interface jwt {
     id: string,
     iat: number

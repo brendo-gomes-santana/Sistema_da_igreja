@@ -19,7 +19,8 @@ export default async function ListMusicServer(body:ListMusictype){
             title: true,
             link_CifraClub: true,
             id_youtube: true,
-            url_image: true
+            url_image: true,
+            Categories: true
         }
     })
 

@@ -22,6 +22,23 @@ export const CreateEventSchema = z.object({
                 error: "id_levite must be a valid UUID"
             }).min(1, "id_levite is required field"),
         })
+    ),
+
+    musics: z.array(
+        z.object({
+            order: z.number(),
+            id_category: z.uuid({
+                error: "id_category must is valid UUID"
+            }).optional(),
+            id_music: z.uuid({
+                error: "id_music must is valid UUID"
+            }),
+        })
     ).optional()
 })
 
+export const UniqueIdEventSchema = z.object({
+    id: z.uuid({
+        error: "id of event must be a valid UUID"
+    })
+})
