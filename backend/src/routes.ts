@@ -9,12 +9,15 @@ import ListMusicController from './controller/Musics/ListMusicController';
 import UniqueMusicController from './controller/Musics/UniqueMusicController';
 import DeleteMusicController from './controller/Musics/DeleteMusicController';
 import CreateLeviteController from './controller/Levites/CreateLeviteController';
-import ListLeviteServer from './server/Levites/ListLeviteServer';
+import ListLevitesController from './controller/Levites/ListLevitesController';
+import ListTypesController from './controller/Types/ListTypesController';
+import ListCategoriesController from './controller/Category/ListCategoriesController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
 import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/musics';
 import { CreateLeviteSchema } from './schemas/leivtes';
+
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -87,5 +90,25 @@ export async function routes(app: FastifyTypedInstance) {
             security: [{ bearerAuth: [] }],
             description: 'List the all levites',
         }
-    }, ListLeviteServer) // Required Token
+    }, ListLevitesController) // Required Token
+
+    //TYPES
+    app.get('/types', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['TYPE'],
+            security: [{ bearerAuth: [] }],
+            description: 'List the all levites',
+        }
+    }, ListTypesController) // Required Token
+
+    //CATEGORIES
+    app.get('/categories', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['CATEGORIES'],
+            security: [{ bearerAuth: [] }],
+            description: 'List the all categories',
+        }
+    }, ListCategoriesController) // Required Token
 }
