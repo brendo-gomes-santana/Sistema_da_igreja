@@ -5,8 +5,6 @@ export const Form = styled.form`
     max-width: 1080px;
     
 
-    margin: 20vh auto;
-
     border-radius: 13px;
     border: 1px solid #ddd;
 
@@ -15,6 +13,8 @@ export const Form = styled.form`
     gap: 1em;
 
     box-shadow: 1px 1px 20px rgba(0,0,0,0.3);
+
+    background-color: ${props => props.theme.white};
 
     section {
         background-color: ${props => props.theme.CinnamonBrown};
@@ -39,7 +39,7 @@ export const Form = styled.form`
         font-weight: bold;
 
         max-width: 500px;
-        width: 100%;
+        width: 90%;
         cursor: pointer;
     }
 `
