@@ -1,13 +1,15 @@
 import { BrowserRouter } from 'react-router'
 import { createRoot } from 'react-dom/client'
 
-import { GlobalStyle } from './styled.global.js'
-import App from './App.jsx'
+import { GlobalStyle, GlobalFormat } from './styled.global.js';
+import { ThemeProvider } from 'styled-components';
+import Routers from './router.jsx'
 
 createRoot(document.getElementById('root')).render(
-    <BrowserRouter>
-      <App />
-      <GlobalStyle/>
-    </BrowserRouter>
-
+  <BrowserRouter>
+    <ThemeProvider theme={GlobalFormat}>
+      <Routers />
+      <GlobalStyle />
+    </ThemeProvider>
+  </BrowserRouter>
 )
