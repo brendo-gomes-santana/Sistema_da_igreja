@@ -68,7 +68,7 @@ export default function Event() {
                                     .filter(item => item.category.name === "Celebração")
                                     .map(item => (
                                         <List key={item.id}>
-                                            <a href={`/musica/${item.id}`}>{item.name}</a>
+                                            <a href={`/musica/${item.id_music}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />
@@ -89,7 +89,7 @@ export default function Event() {
                                     .filter(item => item.category.name === "Adoração")
                                     .map(item => (
                                         <List key={item.id}>
-                                            <a href={`/musica/${item.id}`}>{item.name}</a>
+                                            <a href={`/musica/${item.id_music}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />
@@ -110,7 +110,7 @@ export default function Event() {
                                     .filter(item => item.category.name === "Oferta")
                                     .map(item => (
                                         <List key={item.id}>
-                                            <a href={`/musica/${item.id}`}>{item.name}</a>
+                                            <a href={`/musica/${item.id_music}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />

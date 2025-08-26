@@ -1,3 +1,6 @@
+#whatsApp
+/.wwebjs_auth/
+/.wwebjs_cache/
 
 # Node
 node_modules/

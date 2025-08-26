@@ -22,7 +22,7 @@ export default async function UniqueEventServer({ id }:UniqueIdEventType){
                     }
                 },
                 orderBy: {
-                    order: "desc"
+                    order: "asc"
                 }
             },
             Events_Levites: {
@@ -57,6 +57,7 @@ export default async function UniqueEventServer({ id }:UniqueIdEventType){
         })),
         musics: event.Events_Musics.map((music) => ({
             id: music.id,
+            id_music: music.Musics.id,
             order: music.order,
             name: music.Musics.title,
             
