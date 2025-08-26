@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 import fundo from '../../assets/fundo.jpg'
 import { Container } from "../../styled.global"

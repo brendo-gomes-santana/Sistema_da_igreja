@@ -1,6 +1,5 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router";
 
 import { AuthContext } from "./context/auth";
 

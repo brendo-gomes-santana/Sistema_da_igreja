@@ -15,6 +15,10 @@ export const GlobalStyle = createGlobalStyle`
     input, textarea, select {
         outline: none;
     }
+
+    a{
+        text-decoration: none;
+    }
 `
 
 export const Container = styled.section`
