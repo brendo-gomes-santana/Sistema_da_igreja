@@ -4,7 +4,6 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
     
-    
     *{
         margin: 0;
         padding: 0;
@@ -31,7 +30,7 @@ export const Container = styled.section`
 
     width: 100%;
 
-    @media(max-width: 425px){
+    @media(max-width: 430px){
         padding: 1em;
     }
 `

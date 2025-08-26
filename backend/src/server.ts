@@ -1,10 +1,12 @@
 import { fastify, FastifyRequest, FastifyReply } from 'fastify';
 import { fastifyCors } from '@fastify/cors';
-import { validatorCompiler, serializerCompiler, jsonSchemaTransform } from 'fastify-type-provider-zod';
 import { fastifySwagger } from '@fastify/swagger';
+import { validatorCompiler, serializerCompiler, jsonSchemaTransform } from 'fastify-type-provider-zod';
 import fastifySwaggerUi from '@fastify/swagger-ui';
 import fastifyJwt from '@fastify/jwt';
 
+
+import clientWhatsApp from './function/whatsApp';
 import { routes } from './routes';
 import { ZodTypeProvider } from 'fastify-type-provider-zod';
 
@@ -14,6 +16,8 @@ app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(fastifyCors, { origin: '*' })
+
+
 
 app.register(fastifySwagger, {
     openapi: {
@@ -30,15 +34,11 @@ app.register(fastifySwagger, {
                 }
             }
         },
-        security: [
-            {
-                bearerAuth: []
-            }
-        ]
     },
 
     transform: jsonSchemaTransform
 })
+
 
 app.register(fastifySwaggerUi, {
     routePrefix: '/docs'
@@ -56,6 +56,6 @@ app.decorate("authenticate", async (request: FastifyRequest, reply: FastifyReply
 });
 app.register(routes)
 
-app.listen({ port: 3333 }).then(() => {
+app.listen({ port: 3333, host: '0.0.0.0' }).then(() => {
     console.log('HTTP server runing!')
 })

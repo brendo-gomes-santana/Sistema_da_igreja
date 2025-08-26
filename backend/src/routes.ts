@@ -15,12 +15,14 @@ import ListCategoriesController from './controller/Category/ListCategoriesContro
 import CreateEventController from './controller/Events/CreateEventController';
 import ListEventsController from './controller/Events/ListEventsController';
 import UniqueEventController from './controller/Events/UniqueEventController';
+import WhatsappGroupController from './controller/Whatsapp/WhatsappGroupController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
 import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/musics';
 import { CreateLeviteSchema } from './schemas/leivtes';
 import { CreateEventSchema, UniqueIdEventSchema } from './schemas/Events';
+import { sendWhatsappShema } from './schemas/whatsapp';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -138,4 +140,15 @@ export async function routes(app: FastifyTypedInstance) {
             params: UniqueIdEventSchema
         }
     }, UniqueEventController)
+
+    // SEND WHATSAPP
+    app.post('/send-whatsapp/:id_event', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['WHATSAPP'],
+            security: [{ bearerAuth: [] }],
+            description: 'will send a message to the "on fire" group about event details.',
+            params: sendWhatsappShema
+        }
+    }, WhatsappGroupController) // Required Token
 }
