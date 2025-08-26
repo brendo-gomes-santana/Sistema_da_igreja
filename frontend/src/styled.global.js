@@ -25,8 +25,8 @@ export const Container = styled.section`
     
     padding: 5em;
 
-    height: 100vh;
-    min-height: 100vh;
+    height: 90vh;
+    min-height: 90vh;
     max-height: 100%;
 
     width: 100%;

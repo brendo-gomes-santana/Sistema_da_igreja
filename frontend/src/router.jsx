@@ -5,6 +5,7 @@ import { AuthContext } from "./context/auth";
 
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Event from "./pages/Event";
 
 function Segury({ children }) {
 
@@ -30,6 +31,7 @@ export default function Routers() {
         <Routes>
             <Route index element={<Login />} />
             <Route path="/painel" element={ <Dashboard /> } />
+            <Route path="/escala/:id" element={ <Event /> } />
         </Routes>
     )
 }
