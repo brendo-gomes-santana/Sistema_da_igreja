@@ -1,23 +1,24 @@
 import { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router";
 import api from '../api';
 
 export const AuthContext = createContext({});
 
 export default function AuthProvider({ children }) {
     
-    const navigate = useNavigate()
+
     const [loadingAuth, setLoadingAuth] = useState(true);
+    const [token, setToken]= useState('')
 
     useEffect(() => {
         (() => {
 
-            const token = localStorage.getItem('token');
+            const tokenLocal = localStorage.getItem('token');
 
-            if (token) {
-                api.defaults.headers.common['Authorization'] = token;
+            if (tokenLocal) {
+                api.defaults.headers.common['Authorization'] = tokenLocal;
+                setToken(tokenLocal)
             } else {
-                navigate('/');
+                setToken('')
             }
 
             setLoadingAuth(false)
@@ -28,7 +29,7 @@ export default function AuthProvider({ children }) {
     if (loadingAuth) { return <h1>Carregando...</h1> }
 
     return (
-        <AuthContext.Provider>
+        <AuthContext.Provider value={{ token }}>
 
             {children}
 
