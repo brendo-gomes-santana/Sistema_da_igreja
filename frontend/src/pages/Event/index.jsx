@@ -8,6 +8,12 @@ import api from "../../api";
 
 import iconYoutube from '../../assets/icon_youtube.png'
 import iconCifra from '../../assets/icon_cifraClub.png'
+
+import {
+    Cards,
+    List
+} from './styled'
+
 export default function Event() {
 
     const [loading, setLoading] = useState(true)
@@ -35,11 +41,11 @@ export default function Event() {
             <Header />
             <Container>
                 <Title title={data.name} date={data.date} />
-                <article>
+                <Cards>
                     <p>{data.observation}</p>
-                </article>
+                </Cards>
 
-                <article>
+                <Cards>
                     <h2>Banda</h2>
                     <hr />
                     <ul>
@@ -49,9 +55,9 @@ export default function Event() {
                             )
                         })}
                     </ul>
-                </article>
+                </Cards>
 
-                <article>
+                <Cards>
                     <h2>Louvores</h2>
                     <hr />
                     <ul>
@@ -61,8 +67,8 @@ export default function Event() {
                                 {data.musics
                                     .filter(item => item.category.name === "Celebração")
                                     .map(item => (
-                                        <li key={item.id}>
-                                            {item.name}
+                                        <List key={item.id}>
+                                            <a href={`/musica/${item.id}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />
@@ -71,7 +77,7 @@ export default function Event() {
                                                     <img src={iconYoutube} alt="logo-cifra-club" />
                                                 </a>
                                             </div>
-                                        </li>
+                                        </List>
                                     ))}
                             </ul>
                         </li>
@@ -82,8 +88,8 @@ export default function Event() {
                                 {data.musics
                                     .filter(item => item.category.name === "Adoração")
                                     .map(item => (
-                                        <li key={item.id}>
-                                            {item.name}
+                                        <List key={item.id}>
+                                            <a href={`/musica/${item.id}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />
@@ -92,7 +98,7 @@ export default function Event() {
                                                     <img src={iconYoutube} alt="logo-cifra-club" />
                                                 </a>
                                             </div>
-                                        </li>
+                                        </List>
                                     ))}
                             </ul>
                         </li>
@@ -103,8 +109,8 @@ export default function Event() {
                                 {data.musics
                                     .filter(item => item.category.name === "Oferta")
                                     .map(item => (
-                                        <li key={item.id}>
-                                            {item.name}
+                                        <List key={item.id}>
+                                            <a href={`/musica/${item.id}`}>{item.name}</a>
                                             <div>
                                                 <a target="_blank" href={item.link_cifra} >
                                                     <img src={iconCifra} alt="logo-cifra-club" />
@@ -113,12 +119,12 @@ export default function Event() {
                                                     <img src={iconYoutube} alt="logo-cifra-club" />
                                                 </a>
                                             </div>
-                                        </li>
+                                        </List>
                                     ))}
                             </ul>
                         </li>
                     </ul>
-                </article>
+                </Cards>
             </Container>
         </>
     )
