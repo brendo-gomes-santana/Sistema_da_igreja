@@ -29,7 +29,7 @@ export default function Routers() {
     return (
         <Routes>
             <Route index element={<Login />} />
-            <Route path="/painel" element={<Segury> <Dashboard /> </Segury>} />
+            <Route path="/painel" element={ <Dashboard /> } />
         </Routes>
     )
 }

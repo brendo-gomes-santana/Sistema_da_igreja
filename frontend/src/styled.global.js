@@ -23,18 +23,23 @@ export const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.section`
     
-    padding: 0.5em;
+    padding: 5em;
 
     height: 100vh;
     min-height: 100vh;
     max-height: 100%;
 
     width: 100%;
+
+    @media(max-width: 425px){
+        padding: 1em;
+    }
 `
 
 export const GlobalFormat = {
-        white: '#ffffff',
-        CoffeeBrown: "#33221b",
-        CinnamonBrown: "#5E3420",
-        LightPeach: "#ffdac9"
+    black: "#000000",
+    white: '#ffffff',
+    CoffeeBrown: "#33221b",
+    CinnamonBrown: "#5E3420",
+    LightPeach: "#ffdac9"
 }
