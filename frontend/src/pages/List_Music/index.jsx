@@ -45,9 +45,6 @@ export default function ListMusic() {
             const name = searchParams.get("name") || undefined;
             const id_category = searchParams.get("id_category") || undefined;
 
-            setNameMusic(name);
-            setIdCategory(id_category);
-
             try {
                 const [categories, musics] = await Promise.all([
                     api.get('/categories'),

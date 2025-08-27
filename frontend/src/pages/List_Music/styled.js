@@ -7,7 +7,7 @@ export const Form = styled.form`
     margin: 1em auto;
     display: flex;
     gap: 0.5em;
-    
+    flex-wrap: wrap;
     justify-content: center;
 
     input, select, button{
@@ -42,7 +42,6 @@ export const Card = styled.div`
     transition: all 0.3s ease;
 
     padding: 1em 0;
-
     figure{
         flex: 1;
         display: flex;
@@ -78,5 +77,20 @@ export const Card = styled.div`
         transform: scale(1.01);
         box-shadow: 5px 5px 20px rgba(0,0,0,0.3);
         padding: 1em;
+    }
+
+    @media (max-width: 700px) {
+
+        flex-direction: column;
+        figure{
+
+            width: 100%;
+            justify-content: space-between;
+
+        }
+
+        div{
+            align-self: flex-end;
+        }
     }
 `;
