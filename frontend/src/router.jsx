@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Event from "./pages/Event";
 import DetailMusic from "./pages/Detail_Music";
+import ListMusic from "./pages/List_Music";
 
 function Segury({ children }) {
 
@@ -32,6 +33,7 @@ export default function Routers() {
             <Route path="/login" element={<Login />} />
             <Route path="escala/:id" element={<Event />} />
             <Route path="/musica/:id" element={<DetailMusic />} />
+            <Route path="/musicas" element={ <ListMusic/> } />
         </Routes>
     )
 }

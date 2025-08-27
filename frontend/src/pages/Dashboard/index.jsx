@@ -34,7 +34,7 @@ export default function Dashboard() {
 
     return (
         <>
-            <Header />
+            <Header name="Escalas"/>
             <Container style={{
                 display:"flex",
                 flexDirection: "column"

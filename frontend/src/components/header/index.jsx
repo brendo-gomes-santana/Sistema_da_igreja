@@ -11,7 +11,7 @@ import {
     ContainerLink
 } from './styled'
 
-export default function Header() {
+export default function Header({ name }) {
 
     const [open, setOpen] = useState(false);
 
@@ -30,7 +30,7 @@ export default function Header() {
                 <IoIosArrowForward size={40} />
             </button>
 
-            <h1>Escalas</h1>
+            <h1>{name}</h1>
 
             <ContainerLink open={open} >
                 <Link to="/">Escalas</Link>

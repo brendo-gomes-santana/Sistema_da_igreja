@@ -42,9 +42,9 @@ export default function DetailMusic() {
 
     return (
         <>
-            <Header />
+            <Header name="Musica"/>
             <Container>
-                <Title title={data.title} />
+                <Title title={data.title} btnback={true}/>
 
                 <ContainerMusic>
 

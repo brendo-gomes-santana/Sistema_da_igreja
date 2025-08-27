@@ -38,9 +38,9 @@ export default function Event() {
 
     return (
         <>
-            <Header />
+            <Header name="Escala"/>
             <Container>
-                <Title title={data.name} date={data.date} />
+                <Title title={data.name} date={data.date} btnback={true}/>
                 <Cards>
                     <p>{data.observation}</p>
                 </Cards>

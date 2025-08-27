@@ -18,7 +18,7 @@ export default function AuthProvider({ children }) {
             const tokenLocal = localStorage.getItem('token');
 
             if (tokenLocal) {
-                api.defaults.headers.common['Authorization'] = tokenLocal;
+                api.defaults.headers.common['Authorization'] = `bearer ${tokenLocal}`;
                 setToken(tokenLocal)
             } else {
                 setToken('')
@@ -27,7 +27,7 @@ export default function AuthProvider({ children }) {
             setLoadingAuth(false)
 
         })()
-    }, [setToken, setLoadingAuth])
+    }, [])
 
     async function HandleLogin(data) {
         try {
