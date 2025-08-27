@@ -49,8 +49,8 @@ export const ContainerLink = styled.nav`
     width: 200px;
 
     transition: all 0.3s;
-    transform: ${props => props.open ? 'translateX(0em)' : 'translateX(-15em)'
-    };
+    transform: ${props => props.open ? 'translateX(0em)' : 'translateX(-15em)'};
+    z-index: 1000;
 
 
     a{

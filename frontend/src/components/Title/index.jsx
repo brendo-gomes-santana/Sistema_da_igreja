@@ -3,7 +3,7 @@ import { format } from "date-fns"
 import { Container } from "./styled"
 import Auth from '../Auth';
 
-export default function Title({ title, date, btnback, btncreate, namecreate }) {
+export default function Title({ title, date, btnback, btncreate, namecreate, link }) {
     return (
         <Container>
 
@@ -16,7 +16,7 @@ export default function Title({ title, date, btnback, btncreate, namecreate }) {
             
             <Auth>
                 {btncreate && (
-                    <Link style={{ marginLeft: "auto" }}>Cadastrar {namecreate}</Link>
+                    <Link to={link} style={{ marginLeft: "auto" }}>Cadastrar {namecreate}</Link>
                 )}
             </Auth>
 

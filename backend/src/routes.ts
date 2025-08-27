@@ -109,13 +109,12 @@ export async function routes(app: FastifyTypedInstance) {
 
     //CATEGORIES
     app.get('/categories', {
-        onRequest: [app.authenticate],
         schema: {
             tags: ['CATEGORIES'],
-            security: [{ bearerAuth: [] }],
+
             description: 'List the all categories',
         }
-    }, ListCategoriesController) // Required Token
+    }, ListCategoriesController)
 
     //EVENTS
     app.post('/event', {

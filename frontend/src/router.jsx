@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard";
 import Event from "./pages/Event";
 import DetailMusic from "./pages/Detail_Music";
 import ListMusic from "./pages/List_Music";
+import CreateOrUpdateMusic from "./pages/CreateOrUpdateMusic";
+import CreateOrUpdateEvent from "./pages/CreateOrUpdateEvent";
 
 function Segury({ children }) {
 
@@ -34,6 +36,8 @@ export default function Routers() {
             <Route path="escala/:id" element={<Event />} />
             <Route path="/musica/:id" element={<DetailMusic />} />
             <Route path="/musicas" element={ <ListMusic/> } />
+            <Route path="/:action/musica" element={ <CreateOrUpdateMusic/> } />
+            <Route path="/:action/event" element={ <CreateOrUpdateEvent/> } />
         </Routes>
     )
 }

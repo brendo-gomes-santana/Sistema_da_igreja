@@ -39,7 +39,7 @@ export default function Dashboard() {
                 display:"flex",
                 flexDirection: "column"
             }}>
-                <LinkNewEvent to="/nova-escala">Criar novo Escala</LinkNewEvent>
+                <LinkNewEvent to="/criar/event">Criar novo Escala</LinkNewEvent>
                 <Cards>
                     {!loading && data.map((item) => {
                         return (

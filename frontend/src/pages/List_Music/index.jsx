@@ -71,7 +71,12 @@ export default function ListMusic() {
         <>
             <Header name="Musicas" />
             <Container>
-                <Title title="Lista de Musicas" btncreate={true} namecreate="nova musica" />
+                <Title 
+                    link="/criar/musica"
+                    title="Lista de Musicas" 
+                    btncreate={true} 
+                    namecreate="nova musica" 
+                />
                 <Form onSubmit={handleSearchMusics}>
                     <input
                         type="text"
