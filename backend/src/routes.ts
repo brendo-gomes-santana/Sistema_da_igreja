@@ -15,7 +15,7 @@ import ListCategoriesController from './controller/Category/ListCategoriesContro
 import CreateEventController from './controller/Events/CreateEventController';
 import ListEventsController from './controller/Events/ListEventsController';
 import UniqueEventController from './controller/Events/UniqueEventController';
-import WhatsappGroupController from './controller/Whatsapp/WhatsappGroupController';
+import SendWhatsappController from './controller/Whatsapp/SendWhatsappController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
@@ -150,5 +150,5 @@ export async function routes(app: FastifyTypedInstance) {
             description: 'will send a message to the "on fire" group about event details.',
             params: sendWhatsappShema
         }
-    }, WhatsappGroupController) // Required Token
+    }, SendWhatsappController) // Required Token
 }

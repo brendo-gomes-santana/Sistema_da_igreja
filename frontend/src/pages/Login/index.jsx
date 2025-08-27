@@ -1,8 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 
+
+import { AuthContext } from '../../context/auth';
 import fundo from '../../assets/fundo.jpg'
 import { Container } from "../../styled.global"
 import api from '../../api';
@@ -16,17 +18,12 @@ export default function Login() {
 
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit } = useForm();
+
     const navigate = useNavigate();
+    const { HandleLogin } = useContext(AuthContext)
 
     async function handleLogin(data) {
-        try{
-            const response = await api.post('/login', data);
-            localStorage.setItem('token', response.data.token);
-            navigate('/painel')
-        }catch(err){
-            alert(err.response.data.message);
-        }
-
+        await HandleLogin(data)
         setLoading(false)
     }
 

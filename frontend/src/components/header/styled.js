@@ -49,8 +49,7 @@ export const ContainerLink = styled.nav`
     width: 200px;
 
     transition: all 0.3s;
-    transform: ${
-        props => props.open ? 'translateX(0em)' : 'translateX(-15em)'
+    transform: ${props => props.open ? 'translateX(0em)' : 'translateX(-15em)'
     };
 
 
@@ -65,12 +64,14 @@ export const ContainerLink = styled.nav`
             background-color: ${props => props.theme.CoffeeBrown};
 
         }
-    }
 
-    button {
+    }
+    div{
         position: absolute;
         bottom: 10px;
+        left: 0;
+        right: 0;
         padding: 0.5em;
-
     }
+
 `;
