@@ -7,6 +7,7 @@ import api from '../../api';
 
 import {
     Form,
+    ContainerAddLevites,
     ContainerAddMusic,
     SelectMusicContainer
 } from './styled'
@@ -19,6 +20,8 @@ export default function CreateOrUpdateEvent() {
     const [musics, setMusics] = useState([]);
     const [levites, setLevites] = useState([]);
     const [checkedOferta, setCheckedOferta] = useState({});
+    const [levite, setLevite] = useState({});
+    const [type, setType] = useState('');
 
     const categories = ["Celebração", "Adoração", "Oferta"];
 
@@ -99,7 +102,31 @@ export default function CreateOrUpdateEvent() {
             newMusic
         ]))
     }
+    function handleDeleteMusicList(id_music) {
+        const list = musics.filter(item => item.id_music !== id_music);
+        setMusics(list);
+    }
 
+    //ACTION TO ADD OR DELETE LEVITE LIST AND SELECT TOO
+    function handleSelectedLevite(e) {
+        const leviteId = e.target.value;
+        const leviteInfor = data.levites.filter(levite => levite.id === leviteId)[0];
+        setLevite(leviteInfor)
+    }
+    function handleAddLeviteList(){
+
+        const newLevite = {
+            id_type: type,
+            name: levite.types.filter(item => item.id === type)[0].name,
+            id_levite: levite.id
+        }
+
+        setLevites(prev => ([
+            ...prev,
+            newLevite
+        ]))
+    }
+   console.log(levites)
     if (loadingPage) { return <p>Carregando Informacoes</p> }
 
     return (
@@ -111,7 +138,30 @@ export default function CreateOrUpdateEvent() {
                     <input type="text" placeholder='Digite o nome' />
                     <input type="date" />
                     <textarea placeholder='Observacao'></textarea>
+                    <ContainerAddLevites>
+                        <div>
+                            <select onChange={handleSelectedLevite}>
+                                <option value="">Selecione o levita</option>
+                                {data.levites.map((levite) => {
+                                    return (
+                                        <option key={levite.id} value={levite.id}>{levite.name}</option>
+                                    )
+                                })}
+                            </select>
+                            <select value={type} onChange={e => setType(e.target.value)}>
+                                <option value="">Selecione a funcao</option>
+                                {levite.types?.map((type) => {
+                                    return (
+                                        <option key={type.id} value={type.id}>{type.name}</option>
+                                    )
+                                })}
+                            </select>
+                            <button type='button' onClick={() => handleAddLeviteList()}>Cadastrar Levita</button>
+                        </div>
+                        <div>
 
+                        </div>
+                    </ContainerAddLevites>
                     <ContainerAddMusic>
                         <div id='div-container-music-seach'>
                             <div id='divSearch'>
@@ -159,7 +209,7 @@ export default function CreateOrUpdateEvent() {
                             })}
                         </div>
                         <div id='div-container-music'>
-                            {categories.map(cat => (
+                            {musics.length != 0 && categories.map(cat => (
                                 musics
                                     .filter(music => music.name_category === cat)
                                     .map(music => (
@@ -171,14 +221,13 @@ export default function CreateOrUpdateEvent() {
 
                                             <div>
                                                 <p>{music.name_category}</p>
-                                                <button>Delete</button>
+                                                <button type='button' onClick={() => handleDeleteMusicList(music.id_music)}>Delete</button>
                                             </div>
                                         </SelectMusicContainer>
                                     ))
                             ))}
                         </div>
                     </ContainerAddMusic>
-
                 </Form>
             </Container>
         </>
