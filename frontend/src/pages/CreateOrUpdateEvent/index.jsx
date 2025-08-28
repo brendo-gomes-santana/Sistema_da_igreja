@@ -5,6 +5,12 @@ import Header from '../../components/header'
 import Title from '../../components/Title';
 import api from '../../api';
 
+import {
+    Form,
+    ContainerAddMusic,
+    SelectMusicContainer
+} from './styled'
+
 export default function CreateOrUpdateEvent() {
 
     const [loadingPage, setLoadingPage] = useState(true);
@@ -12,6 +18,9 @@ export default function CreateOrUpdateEvent() {
     const [data, setData] = useState([])
     const [musics, setMusics] = useState([]);
     const [levites, setLevites] = useState([]);
+    const [checkedOferta, setCheckedOferta] = useState({});
+
+    const categories = ["Celebração", "Adoração", "Oferta"];
 
     const [filterMusic, setFilterMusic] = useState({
         title: '',
@@ -19,9 +28,6 @@ export default function CreateOrUpdateEvent() {
     })
 
     useEffect(() => {
-
-
-
         (async () => {
             try {
                 const [levites, categories, musics] = await Promise.all([
@@ -62,28 +68,58 @@ export default function CreateOrUpdateEvent() {
         }
     }
 
+    function toggleOferta(id) {
+        setCheckedOferta(prev => ({
+            ...prev,
+            [id]: !prev[id]
+        }));
+    }
+
+    //ACTION TO ADD OR DELETE MUSICS LIST
+    function handleAddMusicList(music) {
+        const isOferta = checkedOferta[music.id] || false;
+        let newMusic = {
+            id_music: music.id,
+            name: music.title,
+            name_category: music.Categories.name,
+            url: music.url_image,
+            order: 0
+        }
+
+        if (isOferta) {
+            newMusic = {
+                ...newMusic,
+                id_category: data.categories.filter(category => category.name === 'Oferta')[0].id,
+                name_category: data.categories.filter(category => category.name === 'Oferta')[0].name
+            }
+        }
+
+        setMusics(prev => ([
+            ...prev,
+            newMusic
+        ]))
+    }
+
     if (loadingPage) { return <p>Carregando Informacoes</p> }
-
-
 
     return (
         <>
-            <Header />
+            <Header name="Escala" />
             <Container>
                 <Title btnback={true} title="Cadastrar novo evento" />
-                <form>
+                <Form>
                     <input type="text" placeholder='Digite o nome' />
                     <input type="date" />
                     <textarea placeholder='Observacao'></textarea>
 
-                    <article>
-                        <div>
-                            <div>
+                    <ContainerAddMusic>
+                        <div id='div-container-music-seach'>
+                            <div id='divSearch'>
                                 <input
                                     value={filterMusic.title}
                                     onChange={e => setFilterMusic({ ...filterMusic, title: e.target.value })}
                                     type="text"
-                                    placeholder='nome do louvo' />
+                                    placeholder='Nome do louvo' />
                                 <select
                                     value={filterMusic.id_category}
                                     onChange={e => setFilterMusic({ ...filterMusic, id_category: e.target.value })}
@@ -105,18 +141,45 @@ export default function CreateOrUpdateEvent() {
                                     <div key={music.id}>
                                         <img src={music.url_image} alt={`imagem-da-musica-${music.title}`} />
                                         <a target='_blank' href={`https://www.youtube.com/watch?v=${music.id_youtube}`}>{music.title}</a>
-                                        <div>
-                                            <input type="checkbox" />Oferta
+
+                                        <div id='containerbtn'>
+                                            {music.Categories.name === "Celebração" && (
+                                                <>
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={checkedOferta[music.id] || false}
+                                                        onChange={() => toggleOferta(music.id)}
+                                                    />Oferta
+                                                </>
+                                            )}
+                                            <button type='button' onClick={() => handleAddMusicList(music)}>Adicionar</button>
                                         </div>
-                                        <button>Adicionar</button>
                                     </div>
                                 )
                             })}
                         </div>
-                        <div></div>
-                    </article>
+                        <div id='div-container-music'>
+                            {categories.map(cat => (
+                                musics
+                                    .filter(music => music.name_category === cat)
+                                    .map(music => (
+                                        <SelectMusicContainer key={music.id_music}>
+                                            <div>
+                                                <img src={music.url} alt={`imagem-da-musica-${music.name}`} />
+                                                <p>{music.name}</p>
+                                            </div>
 
-                </form>
+                                            <div>
+                                                <p>{music.name_category}</p>
+                                                <button>Delete</button>
+                                            </div>
+                                        </SelectMusicContainer>
+                                    ))
+                            ))}
+                        </div>
+                    </ContainerAddMusic>
+
+                </Form>
             </Container>
         </>
     )
