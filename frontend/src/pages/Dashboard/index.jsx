@@ -4,7 +4,7 @@ import { format } from "date-fns";
 
 import Header from "../../components/header"
 import { Container } from "../../styled.global"
-
+import Auth from '../../components/Auth';
 import api from '../../api'
 
 import {
@@ -34,12 +34,14 @@ export default function Dashboard() {
 
     return (
         <>
-            <Header name="Escalas"/>
+            <Header name="Escalas" />
             <Container style={{
-                display:"flex",
+                display: "flex",
                 flexDirection: "column"
             }}>
-                <LinkNewEvent to="/criar/event">Criar novo Escala</LinkNewEvent>
+                <Auth>
+                    <LinkNewEvent to="/criar/event">Criar novo Escala</LinkNewEvent>
+                </Auth>
                 <Cards>
                     {!loading && data.map((item) => {
                         return (

@@ -12,7 +12,7 @@ export default async function ListEventsServer() {
 
     return await prisma.events.findMany({
         orderBy: {
-            date: "desc"
+            date: "asc"
         },
         select: {
             id: true,

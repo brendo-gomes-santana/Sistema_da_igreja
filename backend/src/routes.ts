@@ -16,6 +16,8 @@ import CreateEventController from './controller/Events/CreateEventController';
 import ListEventsController from './controller/Events/ListEventsController';
 import UniqueEventController from './controller/Events/UniqueEventController';
 import SendWhatsappController from './controller/Whatsapp/SendWhatsappController';
+import DeleteLeviteEventController from './controller/EventLevite/DeleteLeviteEventController';
+import CreateLeviteEventController from './controller/EventLevite/CreateLeviteEventController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
@@ -23,6 +25,7 @@ import { CreateMusicSchema, ListMusicShema, UniqueMusicSchema } from './schemas/
 import { CreateLeviteSchema } from './schemas/leivtes';
 import { CreateEventSchema, UniqueIdEventSchema } from './schemas/Events';
 import { sendWhatsappShema } from './schemas/whatsapp';
+import { IdLeviteEventShema, CreateleviteEventShema } from './schemas/EventLevite';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -150,4 +153,25 @@ export async function routes(app: FastifyTypedInstance) {
             params: sendWhatsappShema
         }
     }, SendWhatsappController) // Required Token
+
+    // LEVITES EVENTS
+    app.post('/event/levite', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LEVITES OF EVENT'],
+            security: [{ bearerAuth: [] }],
+            description: 'this route are to create a new levite of event.',
+            body: CreateleviteEventShema
+        }
+    }, CreateLeviteEventController) // Required Token
+
+    app.delete('/event/levite/:id', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LEVITES OF EVENT'],
+            security: [{ bearerAuth: [] }],
+            description: 'this route are to delete levite of event.',
+            params: IdLeviteEventShema
+        }
+    }, DeleteLeviteEventController) // Required Token
 }

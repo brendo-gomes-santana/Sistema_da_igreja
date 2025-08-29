@@ -13,7 +13,7 @@ import {
     SelectMusicContainer
 } from './styled'
 
-export default function CreateOrUpdateEvent() {
+export default function CreateEvent() {
 
     const [loadingPage, setLoadingPage] = useState(true);
 

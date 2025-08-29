@@ -96,11 +96,26 @@ export const ContainerAddMusic = styled.article`
                 }
             }
         }
-        
+
+      
     }
 
     #div-container-music{
         flex: 1;
+    }
+
+    
+    @media (max-width: 1024px){
+        flex-direction: column;
+        #div-container-music-seach{
+            max-height: 50vh;
+        }
+
+        #div-container-music{
+            flex: 1;
+            margin: 0;
+            border-top: 1px solid ${props => props.theme.CinnamonBrown};
+        }
     }
 
 `
