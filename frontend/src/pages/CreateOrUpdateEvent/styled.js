@@ -23,6 +23,18 @@ export const Form = styled.form`
         resize: none;
     }
 
+    #btn-submit {
+        height: 50px;
+        margin: 1em 0;
+
+        background-color: ${props => props.theme.CinnamonBrown};
+        color: ${props => props.theme.white};
+        font-weight: bold;
+
+        border: none;
+        cursor: pointer;
+    }
+
 `
 
 export const ContainerAddMusic = styled.article`
@@ -124,4 +136,51 @@ export const SelectMusicContainer = styled.div`
     }
 `
 
-export const ContainerAddLevites = styled.article``
+export const ContainerAddLevites = styled.article`
+    #search-levite{
+        display: flex;
+        gap: 1em;
+
+        select, button{
+            flex: 1;
+        }
+
+        button{
+            background-color: ${props => props.theme.CinnamonBrown};
+            color: ${props => props.theme.white};
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+    }
+
+    #list-levites{
+        margin: 1em 0;
+        display: flex;
+        gap: 1em;
+        flex-direction: column;
+
+        div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            div{
+                display: flex;
+                align-items: center;
+                gap: 0.5em;
+            }
+
+            button{
+                background-color: ${props => props.theme.CinnamonBrown};
+                color: ${props => props.theme.white};
+                font-weight: bold;
+                border: none;
+                cursor: pointer;
+                padding: 1em 2em;
+                border-radius: 13px;
+            }
+        }
+    }
+`

@@ -1,4 +1,4 @@
-import { fastify, FastifyRequest, FastifyReply } from 'fastify';
+import { fastify } from 'fastify';
 import { fastifyCors } from '@fastify/cors';
 import { fastifySwagger } from '@fastify/swagger';
 import { validatorCompiler, serializerCompiler, jsonSchemaTransform } from 'fastify-type-provider-zod';

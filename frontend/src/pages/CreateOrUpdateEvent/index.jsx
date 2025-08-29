@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 
 import { Container } from '../../styled.global';
 import Header from '../../components/header'
@@ -22,14 +23,15 @@ export default function CreateOrUpdateEvent() {
     const [checkedOferta, setCheckedOferta] = useState({});
     const [levite, setLevite] = useState({});
     const [type, setType] = useState('');
-
-    const categories = ["Celebração", "Adoração", "Oferta"];
-
     const [filterMusic, setFilterMusic] = useState({
         title: '',
         id_category: undefined
     })
 
+    const categories = ["Celebração", "Adoração", "Oferta"];
+
+    const { handleSubmit, register } = useForm();
+    
     useEffect(() => {
         (async () => {
             try {
@@ -113,11 +115,12 @@ export default function CreateOrUpdateEvent() {
         const leviteInfor = data.levites.filter(levite => levite.id === leviteId)[0];
         setLevite(leviteInfor)
     }
-    function handleAddLeviteList(){
+    function handleAddLeviteList() {
 
         const newLevite = {
             id_type: type,
-            name: levite.types.filter(item => item.id === type)[0].name,
+            instrument: levite.types.filter(item => item.id === type)[0].name,
+            name: levite.name,
             id_levite: levite.id
         }
 
@@ -126,7 +129,30 @@ export default function CreateOrUpdateEvent() {
             newLevite
         ]))
     }
-   console.log(levites)
+    function handleDeletLeviteList(id_levite){
+        const newList = levites.filter(levite => levite.id_levite !== id_levite);
+        setLevites(newList);
+    }
+
+    //ACTION CREATE NEW EVENT
+    async function handleCreateNewEvent(data){
+        console.log(data);
+
+        const body = {
+            levitas: levites,
+            musics: musics,
+            ...data
+
+        }
+
+        try{
+            const res = await api.post('/event', body);
+            console.log(res.data);
+        }catch(err){
+            alert(err.response.data.message)
+        }
+    }
+
     if (loadingPage) { return <p>Carregando Informacoes</p> }
 
     return (
@@ -134,12 +160,15 @@ export default function CreateOrUpdateEvent() {
             <Header name="Escala" />
             <Container>
                 <Title btnback={true} title="Cadastrar novo evento" />
-                <Form>
-                    <input type="text" placeholder='Digite o nome' />
-                    <input type="date" />
-                    <textarea placeholder='Observacao'></textarea>
+                <Form onSubmit={handleSubmit(handleCreateNewEvent)}>
+                    <input 
+                        type="text" 
+                        placeholder='Digite o nome' 
+                        {...register('name')}/>
+                    <input type="date" {...register('date')} />
+                    <textarea placeholder='Observacao' {...register('observation')}></textarea>
                     <ContainerAddLevites>
-                        <div>
+                        <div id='search-levite'>
                             <select onChange={handleSelectedLevite}>
                                 <option value="">Selecione o levita</option>
                                 {data.levites.map((levite) => {
@@ -158,8 +187,20 @@ export default function CreateOrUpdateEvent() {
                             </select>
                             <button type='button' onClick={() => handleAddLeviteList()}>Cadastrar Levita</button>
                         </div>
-                        <div>
-
+                        <div id='list-levites'>
+                            {levites.map((levite) => {
+                                return (
+                                    <div key={levite.id_levite}>
+                                        <div>
+                                            <p>
+                                                <strong>{levite.name}</strong>
+                                            </p>
+                                            <p>{levite.instrument}</p>
+                                        </div>
+                                        <button type='button' onClick={() => handleDeletLeviteList(levite.id_levite)}>Delete</button>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </ContainerAddLevites>
                     <ContainerAddMusic>
@@ -228,6 +269,7 @@ export default function CreateOrUpdateEvent() {
                             ))}
                         </div>
                     </ContainerAddMusic>
+                    <button id='btn-submit' type='submit'>Cadastrar evento</button>
                 </Form>
             </Container>
         </>
