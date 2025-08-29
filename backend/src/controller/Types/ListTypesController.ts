@@ -1,13 +1,13 @@
 import { FastifyReply, FastifyRequest } from "fastify";
+import ListTypesServer from "../../server/Types/listTypesServer";
 
-import ListLeviteServer from "../../server/Levites/ListLeviteServer";
 
 export default async function ListTypesController(
     request:FastifyRequest,
     reply: FastifyReply
 ) {
     try {
-        const list = await ListLeviteServer();
+        const list = await ListTypesServer();
         
         return reply.status(200).send(list);
 

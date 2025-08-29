@@ -34,7 +34,7 @@ export default function ListLevite() {
 
     return (
         <>
-            <Header />
+            <Header name="Levitas"/>
             <Container>
                 <Auth>
                     <Title
