@@ -10,6 +10,7 @@ import DetailMusic from "./pages/Detail_Music";
 import ListMusic from "./pages/List_Music";
 import CreateOrUpdateMusic from "./pages/CreateOrUpdateMusic";
 import CreateEvent from "./pages/CreateEvent";
+import ListLevite from "./pages/List_Levite";
 
 function Segury({ children }) {
 
@@ -42,6 +43,7 @@ export default function Routers() {
             <Route path="/musicas" element={<ListMusic />} />
             <Route path="/:action/musica" element={<CreateOrUpdateMusic />} />
             <Route path="/criar/event" element={ <Segury> <CreateEvent /> </Segury> } />
+            <Route path="/levitas" element={ <Segury> <ListLevite /> </Segury> } />
         </Routes>
     )
 }
