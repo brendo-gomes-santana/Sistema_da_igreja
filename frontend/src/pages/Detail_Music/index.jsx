@@ -22,7 +22,6 @@ export default function DetailMusic() {
 
     const { id } = useParams();
     const navigate = useNavigate();
-    const letra = "";
 
     useEffect(() => {
         (async() => {

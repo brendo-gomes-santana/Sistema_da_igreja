@@ -18,6 +18,7 @@ import UniqueEventController from './controller/Events/UniqueEventController';
 import SendWhatsappController from './controller/Whatsapp/SendWhatsappController';
 import DeleteLeviteEventController from './controller/EventLevite/DeleteLeviteEventController';
 import CreateLeviteEventController from './controller/EventLevite/CreateLeviteEventController';
+import CreateLinksController from './controller/Links/CreateLinksController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
@@ -26,6 +27,7 @@ import { CreateLeviteSchema } from './schemas/leivtes';
 import { CreateEventSchema, UniqueIdEventSchema } from './schemas/Events';
 import { sendWhatsappShema } from './schemas/whatsapp';
 import { IdLeviteEventShema, CreateleviteEventShema } from './schemas/EventLevite';
+import { CreateLinkShema } from './schemas/links';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -174,4 +176,14 @@ export async function routes(app: FastifyTypedInstance) {
             params: IdLeviteEventShema
         }
     }, DeleteLeviteEventController) // Required Token
+
+    app.post('/links', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LINKS'],
+            security: [{ bearerAuth: [] }],
+            description: 'this route are to create new links',
+            body: CreateLinkShema
+        }
+    }, CreateLinksController) // Required Token
 }

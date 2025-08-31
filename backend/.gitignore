@@ -47,7 +47,6 @@ coverage/
 *.tsbuildinfo
 
 # Prisma
-/prisma/migrations/*
 /prisma/dev.db
 /prisma/.env
 /prisma/.seed.ts

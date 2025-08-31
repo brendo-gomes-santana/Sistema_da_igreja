@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
+import { MdEditSquare } from "react-icons/md";
 
 import api from '../../api';
 import Header from "../../components/header"
@@ -71,11 +72,11 @@ export default function ListMusic() {
         <>
             <Header name="Musicas" />
             <Container>
-                <Title 
+                <Title
                     link="/criar/musica"
-                    title="Lista de Musicas" 
-                    btncreate={true} 
-                    namecreate="nova musica" 
+                    title="Lista de Musicas"
+                    btncreate={true}
+                    namecreate="nova musica"
                 />
                 <Form onSubmit={handleSearchMusics}>
                     <input
@@ -112,6 +113,9 @@ export default function ListMusic() {
                                 <a target='_blank' href={music.link_CifraClub}>
                                     <img src={iconCifra} alt="logo-cifra-club" />
                                 </a>
+                                <Link to={`/atualizar/musica/${music.id}`}>
+                                    <MdEditSquare  size={50}/>
+                                </Link>
                             </div>
                         </Card>
                     ))}

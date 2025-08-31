@@ -17,7 +17,18 @@ export default async function UniqueMusicServer(body: UniqueMusicType) {
             url_image: true,
             link_CifraClub: true,
             id_youtube: true,
-            Categories: true
+            Categories: true,
+            Links: {
+                select: {
+                    id: true, 
+                    link: true,
+                    Types: {
+                        select: {
+                            name: true
+                        }
+                    }
+                }
+            }
         },
     })
     if (!music) {

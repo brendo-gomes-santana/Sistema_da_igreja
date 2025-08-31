@@ -66,6 +66,10 @@ export const Card = styled.div`
             border-radius: 13px;
             margin: 0 0.5em;
         }
+
+        a{
+            color: ${props => props.theme.CinnamonBrown};
+        }
     }
 
     &:not(:last-child){

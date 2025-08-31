@@ -19,7 +19,7 @@ import {
     ContainerInfor
 } from './styled.js'
 
-export default function CreateOrUpdateMusic() {
+export default function CreateMusic() {
 
     const [dataYoutube, setDataYoutube] = useState([])
     const [categories, setCategories] = useState([])

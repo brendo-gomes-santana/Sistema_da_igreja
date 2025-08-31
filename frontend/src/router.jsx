@@ -8,11 +8,11 @@ import Dashboard from "./pages/Dashboard";
 import Event from "./pages/Event";
 import DetailMusic from "./pages/Detail_Music";
 import ListMusic from "./pages/List_Music";
-import CreateOrUpdateMusic from "./pages/CreateOrUpdateMusic";
+import CreateMusic from "./pages/CreateMusic";
 import CreateEvent from "./pages/CreateEvent";
 import ListLevite from "./pages/List_Levite";
 import CreateNewLevite from "./pages/CreateNewLevite";
-
+import UpdateMusic from "./pages/Update_Music";
 function Segury({ children }) {
 
     const navigate = useNavigate();
@@ -42,10 +42,11 @@ export default function Routers() {
             <Route path="escala/:id" element={<Event />} />
             <Route path="/musica/:id" element={<DetailMusic />} />
             <Route path="/musicas" element={<ListMusic />} />
-            <Route path="/:action/musica" element={<CreateOrUpdateMusic />} />
+            <Route path="/criar/musica" element={<CreateMusic />} />
             <Route path="/criar/event" element={ <Segury> <CreateEvent /> </Segury> } />
             <Route path="/levitas" element={ <Segury> <ListLevite /> </Segury> } />
             <Route path="/criar/levita" element={ <Segury> <CreateNewLevite /> </Segury> } />
+            <Route path="/atualizar/musica/:id" element={ <Segury> <UpdateMusic /> </Segury> } />
         </Routes>
     )
 }
