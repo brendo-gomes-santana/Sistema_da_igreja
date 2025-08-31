@@ -7,10 +7,27 @@ type CreateLinkType = z.infer<typeof CreateLinkShema>
 
 export default async function CreateLinkServe({ links }: CreateLinkType){
 
-    const create = await prisma.links.createMany({
+    await prisma.links.createMany({
         data: links
     })
 
-    return create
+    const list = await prisma.links.findMany({
+        where: {
+            link: {
+                in: links.map(link => link.link)
+            }
+        },
+        select: {
+            id: true,
+            link: true,
+            Types: {
+                select:{
+                    name: true
+                }
+            }
+        }
+    })
+
+    return list
 
 }

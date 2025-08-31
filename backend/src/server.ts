@@ -15,7 +15,10 @@ const app = fastify().withTypeProvider<ZodTypeProvider>();
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
-app.register(fastifyCors, { origin: '*' })
+app.register(fastifyCors, { 
+    origin: '*',
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+})
 
 
 

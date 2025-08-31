@@ -15,3 +15,9 @@ export const CreateLinkShema = z.object({
         })
     )
 })
+
+export const DeleteLinkShema = z.object({
+    id: z.uuid({
+        error:"id of link must be valid UUID"
+    })
+})

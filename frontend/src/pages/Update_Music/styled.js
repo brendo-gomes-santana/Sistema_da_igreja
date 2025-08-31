@@ -8,7 +8,7 @@ export const CreateLink = styled.form`
     flex-direction: column;
     h2{
         text-align: center;
-
+        color: ${props => props.theme.CinnamonBrown};
     }
     hr{
         margin-bottom: 1em;
@@ -62,5 +62,16 @@ export const CreateLink = styled.form`
             }
         }
     }
+    button {
+        background-color: ${props => props.theme.CinnamonBrown};
+        color: ${props => props.theme.white};
+        border: none;
+        height: 50px;
+        font-weight: bold;
+        
+        align-self: center;
 
+        width: 50%;
+        
+    }
 `

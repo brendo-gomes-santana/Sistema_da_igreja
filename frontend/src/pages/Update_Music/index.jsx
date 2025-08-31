@@ -47,26 +47,75 @@ export default function UpdateMusic() {
         ]))
 
         setLink('')
+
+    }
+
+    //DELETE ONE LINK THAN ARE IN LOCAL ARRAY
+    function handleDeleteNewLink(SelectLink) {
+
+        const linksLocal = newLinks.filter(linkLocal => linkLocal.link !== SelectLink);
+        setNewLinks(linksLocal)
+
     }
 
     // ADD NEW LINKS IN BACKEND
-    async function handleCreateNewLink(e){
+    async function handleCreateNewLink(e) {
         e.preventDefault();
-        if(newLinks.length === 0){
+        if (newLinks.length === 0) {
             alert('Voce nao colocou nem um link novo')
             return
         }
-        try{
+        try {
             const res = await api.post('/links', {
                 links: newLinks
             })
-            console.log(res);
+            const newTypes = res.data
+
+            console.log(newTypes);
+
+            setData(prev => ({
+                ...prev,
+                music: {
+                    ...prev.music,
+                    Links: [
+                        ...prev.music.Links,
+                        ...newLinks
+                    ]
+                }
+            }))
+
+            setNewLinks([]);
+
             alert('cadastrado com sucesso')
-        }catch(err){
+        } catch (err) {
             alert(err.response.data.message);
         }
     }
 
+    // DELETE ONE LINK THAN ARE IN BACKEND
+    async function handleDeleteLink(id) {
+
+        try {
+
+            await api.delete(`/link/${id}`);
+
+            const musicsTypesUpdate = data.music.Links.filter(type => type.id !== id);
+           
+            setData(prev => ({
+                ...prev,
+                music: {
+                    ...prev.music,
+                    Links: [
+                        ...musicsTypesUpdate
+                    ]
+                }
+            }))
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    
     useEffect(() => {
         (async () => {
             try {
@@ -91,7 +140,7 @@ export default function UpdateMusic() {
     }, [id])
 
     if (loading) { return <h1>Carregando informacoes...</h1> }
-    console.log(data);
+    
     return (
         <>
             <Header name="Música" />
@@ -123,17 +172,33 @@ export default function UpdateMusic() {
                         </button>
                     </div>
                     <div id='container-links'>
-                        {newLinks.map((link) => {
+                        {newLinks.length !== 0 && newLinks.map((link) => {
                             return (
                                 <span key={link.link}>
                                     <a target='_blank' href={link.link}>
                                         {link.name}
                                     </a>
-                                    <button>
-                                        <AiFillDelete size={20}/>
+                                    <button type='button' onClick={() => handleDeleteNewLink(link.link)}>
+                                        <AiFillDelete size={20} />
                                     </button>
                                 </span>
 
+                            )
+                        })}
+                        {data.music.Links.map((link) => {
+                            return (
+                                <span key={link.id} style={{ border: "1px solid #000" }}>
+                                    <a
+                                        style={{ color: "#000" }}
+                                        target='_blank'
+                                        href={link.link}
+                                    >
+                                        {link.Types?.name}
+                                    </a>
+                                    <button type='button' onClick={() => handleDeleteLink(link.id)}>
+                                        <AiFillDelete size={20} />
+                                    </button>
+                                </span>
                             )
                         })}
                     </div>
