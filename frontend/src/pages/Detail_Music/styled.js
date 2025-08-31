@@ -37,3 +37,23 @@ export const ContainerMusic = styled.article`
         flex-direction: column-reverse;
     }
 `
+export const ContainerLinks = styled.div`
+    
+    width: 100%;
+    margin: 1em 0;
+    h2{
+        margin: 0.5em 0;
+    }
+    span{
+        display: flex;
+        gap: 1em;
+        flex-wrap: wrap;
+        a{
+            padding: 0.5em 1em;
+            border: 1px solid ${props => props.theme.black};
+            border-radius: 13px;
+            color: ${props => props.theme.black};
+        }
+    }
+
+`

@@ -45,7 +45,7 @@ export default function Dashboard() {
                 <Cards>
                     {!loading && data.map((item) => {
                         return (
-                            <Link to={`/escala/${item.id}`}>
+                            <Link key={item.id} to={`/escala/${item.id}`}>
                                 <h2>{item.name}</h2>
                                 <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
                             </Link>

@@ -10,7 +10,8 @@ import api from '../../api';
 import image_Cifra from "../../assets/icon_cifraClub.png"
 
 import {
-    ContainerMusic
+    ContainerMusic,
+    ContainerLinks
 } from './styled'
 
 export default function DetailMusic() {
@@ -24,7 +25,7 @@ export default function DetailMusic() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        (async() => {
+        (async () => {
             try {
                 const res = await api.get(`/music/${id}`);
                 setData(res.data)
@@ -41,9 +42,9 @@ export default function DetailMusic() {
 
     return (
         <>
-            <Header name="Musica"/>
+            <Header name="Musica" />
             <Container>
-                <Title title={data.title} btnback={true}/>
+                <Title title={data.title} btnback={true} />
 
                 <ContainerMusic>
 
@@ -60,6 +61,25 @@ export default function DetailMusic() {
                         <a target="_blank" href={data.link_CifraClub}>
                             <img src={image_Cifra} alt="icon-cifra-club" />
                         </a>
+                        {data.Links.length !== 0 && (
+                            <ContainerLinks>
+                                <h2>Aulas</h2>
+                                <span id='links'>
+                                    {data.Links.map((link) => {
+                                        return (
+                                            <a
+                                                target='_blank'
+                                                key={link.id}
+                                                href={link.link}
+                                            >
+                                                {link.Types.name}
+                                            </a>
+                                        )
+                                    })}
+                                </span>
+
+                            </ContainerLinks>
+                        )}
 
                     </div>
                 </ContainerMusic>
