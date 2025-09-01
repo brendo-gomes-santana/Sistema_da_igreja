@@ -29,7 +29,7 @@ export default function CreateNewLevite() {
     }, [])
 
     function handleCheckbox(e) {
-        const value = e.target.value
+        const value = e.target.value;
 
         const existId = list.find(type => type === value);
 
