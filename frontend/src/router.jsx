@@ -13,6 +13,8 @@ import CreateEvent from "./pages/CreateEvent";
 import ListLevite from "./pages/List_Levite";
 import CreateNewLevite from "./pages/CreateNewLevite";
 import UpdateMusic from "./pages/Update_Music";
+import UpdateEvent from "./pages/Update_Event";
+
 function Segury({ children }) {
 
     const navigate = useNavigate();
@@ -47,6 +49,7 @@ export default function Routers() {
             <Route path="/levitas" element={ <Segury> <ListLevite /> </Segury> } />
             <Route path="/criar/levita" element={ <Segury> <CreateNewLevite /> </Segury> } />
             <Route path="/atualizar/musica/:id" element={ <Segury> <UpdateMusic /> </Segury> } />
+            <Route path="/atualizar/evento/:id" element={ <Segury> <UpdateEvent /> </Segury> } />
         </Routes>
     )
 }

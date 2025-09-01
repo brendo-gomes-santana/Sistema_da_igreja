@@ -10,6 +10,8 @@ import { Container } from "../../styled.global"
 import iconYoutube from '../../assets/icon_youtube.png'
 import iconCifra from '../../assets/icon_cifraClub.png'
 
+import Auth from '../../components/Auth';
+
 import {
     Form,
     Card,
@@ -113,9 +115,11 @@ export default function ListMusic() {
                                 <a target='_blank' href={music.link_CifraClub}>
                                     <img src={iconCifra} alt="logo-cifra-club" />
                                 </a>
-                                <Link to={`/atualizar/musica/${music.id}`}>
-                                    <MdEditSquare  size={50}/>
-                                </Link>
+                                <Auth>
+                                    <Link to={`/atualizar/musica/${music.id}`}>
+                                        <MdEditSquare size={50} />
+                                    </Link>
+                                </Auth>
                             </div>
                         </Card>
                     ))}

@@ -41,9 +41,7 @@ export const ContainerLinks = styled.div`
     
     width: 100%;
     margin: 1em 0;
-    h2{
-        margin: 0.5em 0;
-    }
+
     span{
         display: flex;
         gap: 1em;
@@ -53,6 +51,7 @@ export const ContainerLinks = styled.div`
             border: 1px solid ${props => props.theme.black};
             border-radius: 13px;
             color: ${props => props.theme.black};
+            font-weight: bold;
         }
     }
 

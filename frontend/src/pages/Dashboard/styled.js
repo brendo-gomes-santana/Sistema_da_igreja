@@ -5,24 +5,7 @@ export const Cards = styled.section`
     display: flex;
     flex-direction: column;
     
-    a{
-        border-bottom: 1px solid ${props => props.theme.LightPeach};
 
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        padding: 2em 1em;
-        color: ${props => props.theme.CoffeeBrown};
-        transition: all 0.3s;
-        &:last-child{
-            border: none;
-        }
-
-        &:hover{
-            background-color: ${props => props.theme.LightPeach};
-        }
-    }
 `
 
 export const LinkNewEvent = styled(Link)`
@@ -36,3 +19,48 @@ export const LinkNewEvent = styled(Link)`
 
     font-weight: bold;
 `
+
+export const Card = styled.article`
+    border-bottom: 1px solid ${props => props.theme.LightPeach};
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 2em 1em;
+    color: ${props => props.theme.CoffeeBrown};
+    transition: all 0.3s;
+
+    a{
+        color: ${props => props.theme.black};
+    }
+
+    div{
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        button{
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    &:last-child{
+        border: none;
+    }
+
+    &:hover{
+        background-color: ${props => props.theme.LightPeach};
+    }
+
+    @media (max-width: 768px){
+        flex-direction: column;
+        gap: 1em;
+
+        a{
+            text-align: center;
+        }
+    }
+`;

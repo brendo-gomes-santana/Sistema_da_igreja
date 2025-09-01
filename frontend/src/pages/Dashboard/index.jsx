@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
+import { MdEditSquare } from "react-icons/md";
+import { RiDeleteBinFill } from "react-icons/ri";
+import { FaSquareWhatsapp } from "react-icons/fa6";
 
 import Header from "../../components/header"
 import { Container } from "../../styled.global"
@@ -9,7 +12,8 @@ import api from '../../api'
 
 import {
     LinkNewEvent,
-    Cards
+    Cards,
+    Card
 } from './styled'
 
 export default function Dashboard() {
@@ -45,10 +49,23 @@ export default function Dashboard() {
                 <Cards>
                     {!loading && data.map((item) => {
                         return (
-                            <Link key={item.id} to={`/escala/${item.id}`}>
-                                <h2>{item.name}</h2>
-                                <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
-                            </Link>
+                            <Card key={item.id}>
+                                <Link to={`/escala/${item.id}`}>
+                                    <p>{format(new Date(item.date), "dd/MM/yyyy")}</p>
+                                    <h2>{item.name}</h2>
+                                </Link>
+                                <div>
+                                    <Link to={`/atualizar/evento/${item.id}`}>
+                                        <MdEditSquare size={50} />
+                                    </Link>
+                                    <button>
+                                        <FaSquareWhatsapp size={50} color="#4BF289"/>
+                                    </button>
+                                    <button onClick={() => { console.log('testo') }}>
+                                        <RiDeleteBinFill size={50} color="#F57065"/>
+                                    </button>
+                                </div>
+                            </Card>
                         )
                     })}
                 </Cards>
