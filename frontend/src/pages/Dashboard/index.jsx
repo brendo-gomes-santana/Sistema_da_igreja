@@ -10,6 +10,8 @@ import { Container } from "../../styled.global"
 import Auth from '../../components/Auth';
 import api from '../../api'
 
+import PageLoading from "../../components/PageLoading";
+
 import {
     LinkNewEvent,
     Cards,
@@ -46,7 +48,7 @@ export default function Dashboard() {
             }
         })()
     }, [])
-
+    if(loading) { return <PageLoading title="Carregando informações" /> }
     return (
         <>
             <Header name="Escalas" />
