@@ -27,7 +27,7 @@ model Users {
 
 model Categories {
   id   String @id @default(uuid())
-  name String
+  name String @unique
 
   Musics        Musics[]
   Events_Musics Events_Musics[]
@@ -37,7 +37,7 @@ model Categories {
 
 model Types {
   id   String @id @default(uuid())
-  name String
+  name String @unique
 
   Types_Levites  Types_Levites[]
   Events_Levites Events_Levites[]
