@@ -35,8 +35,6 @@ async function main() {
                 { name: "Bateria" },
                 { name: "Direção Musical" },
                 { name: "Sonoplastia" },
-                { name: "Mídia - Slide" },
-                { name: "Mídia - Iluminação" },
             ],
             skipDuplicates: true,
         })
