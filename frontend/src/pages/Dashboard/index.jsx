@@ -21,6 +21,17 @@ export default function Dashboard() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    async function handleSendWhatsApp(id){
+        try{
+
+            await api.post(`/send-whatsapp/${id}`);
+            alert('Mensagem enviado com sucesso')
+
+        }catch(err){
+            alert(err.response.data.message)
+        }
+    }
+
     useEffect(() => {
         (async () => {
             try {
@@ -58,7 +69,7 @@ export default function Dashboard() {
                                     <Link to={`/atualizar/evento/${item.id}`}>
                                         <MdEditSquare size={50} />
                                     </Link>
-                                    <button>
+                                    <button onClick={()=> handleSendWhatsApp(item.id)}>
                                         <FaSquareWhatsapp size={50} color="#4BF289"/>
                                     </button>
                                     <button onClick={() => { console.log('testo') }}>
