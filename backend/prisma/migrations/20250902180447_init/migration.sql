@@ -88,6 +88,16 @@ CREATE TABLE "public"."eventsLevites" (
     CONSTRAINT "eventsLevites_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "public"."links" (
+    "id" TEXT NOT NULL,
+    "link" TEXT NOT NULL,
+    "id_music" TEXT NOT NULL,
+    "id_type" TEXT NOT NULL,
+
+    CONSTRAINT "links_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "public"."users"("email");
 
@@ -120,3 +130,9 @@ ALTER TABLE "public"."eventsLevites" ADD CONSTRAINT "eventsLevites_id_type_fkey"
 
 -- AddForeignKey
 ALTER TABLE "public"."eventsLevites" ADD CONSTRAINT "eventsLevites_id_levite_fkey" FOREIGN KEY ("id_levite") REFERENCES "public"."levites"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."links" ADD CONSTRAINT "links_id_music_fkey" FOREIGN KEY ("id_music") REFERENCES "public"."musics"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "public"."links" ADD CONSTRAINT "links_id_type_fkey" FOREIGN KEY ("id_type") REFERENCES "public"."types"("id") ON DELETE CASCADE ON UPDATE CASCADE;
