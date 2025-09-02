@@ -20,6 +20,8 @@ import DeleteLeviteEventController from './controller/EventLevite/DeleteLeviteEv
 import CreateLeviteEventController from './controller/EventLevite/CreateLeviteEventController';
 import CreateLinksController from './controller/Links/CreateLinksController';
 import DeleteLinkControler from './controller/Links/DeleteLinkController';
+import CreateMusicEventController from './controller/EventMusic/createMusicEventController';
+import DeleteMusicEventController from './controller/EventMusic/deleteMusicEventController';
 
 //SCHEMAS
 import { CreateUser, LoginUserSchema } from "./schemas/users";
@@ -29,6 +31,7 @@ import { CreateEventSchema, UniqueIdEventSchema } from './schemas/Events';
 import { sendWhatsappShema } from './schemas/whatsapp';
 import { IdLeviteEventShema, CreateleviteEventShema } from './schemas/EventLevite';
 import { CreateLinkShema, DeleteLinkShema } from './schemas/links';
+import { createMusicEventSchema, DeleteMusicEventShema } from './schemas/EventMusic';
 
 export async function routes(app: FastifyTypedInstance) {
 
@@ -157,6 +160,27 @@ export async function routes(app: FastifyTypedInstance) {
         }
     }, SendWhatsappController) // Required Token
 
+    // LINKS
+    app.post('/links', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LINKS'],
+            security: [{ bearerAuth: [] }],
+            description: 'this route are to create new links',
+            body: CreateLinkShema
+        }
+    }, CreateLinksController) // Required Token
+
+    app.delete('/link/:id', {
+        onRequest: [app.authenticate],
+        schema: {
+            tags: ['LINKS'],
+            security: [{ bearerAuth: [] }],
+            description: 'this route are to delete link',
+            params: DeleteLinkShema
+        }
+    }, DeleteLinkControler) // Required Token
+
     // LEVITES EVENTS
     app.post('/event/levite', {
         onRequest: [app.authenticate],
@@ -178,23 +202,23 @@ export async function routes(app: FastifyTypedInstance) {
         }
     }, DeleteLeviteEventController) // Required Token
 
-    app.post('/links', {
+    //MUSICS OF EVENTS
+    app.post('/event/music', {
         onRequest: [app.authenticate],
         schema: {
-            tags: ['LINKS'],
+            tags: ['MUSICS OF EVENT'],
             security: [{ bearerAuth: [] }],
-            description: 'this route are to create new links',
-            body: CreateLinkShema
+            description: 'this route are to create music of event.',
+            body: createMusicEventSchema
         }
-    }, CreateLinksController) // Required Token
-
-    app.delete('/link/:id', {
+    }, CreateMusicEventController) // Required Token
+    app.delete('/event/music/:id', {
         onRequest: [app.authenticate],
         schema: {
-            tags: ['LINKS'],
+            tags: ['MUSICS OF EVENT'],
             security: [{ bearerAuth: [] }],
-            description: 'this route are to delete link',
-            params: DeleteLinkShema
+            description: 'this route are to delete music of event.',
+            params: DeleteMusicEventShema
         }
-    }, DeleteLinkControler) // Required Token
+    }, DeleteMusicEventController) // Required Token
 }

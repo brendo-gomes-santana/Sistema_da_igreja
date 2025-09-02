@@ -29,9 +29,7 @@ export default async function CreateMusicEventServer(props: CreateMusicEventType
         name: create.Musics.title,
         link_cifra: create.Musics.link_CifraClub,
         id_youtube: create.Musics.id_youtube,
-        category: {
-            name: create.Categories?.name || create.Musics.Categories.name
-        }
+        category: create.Categories || create.Musics.Categories
     }
 
 }

@@ -9,7 +9,8 @@ import Title from "../../components/Title"
 import api from "../../api"
 
 import {
-    FormAddMusic
+    FormAddMusic,
+    ListMusics
 } from './styled'
 
 export default function UpdateEvent() {
@@ -19,24 +20,74 @@ export default function UpdateEvent() {
         musics: [],
         categories: []
     });
+    
     const [loading, setLoading] = useState(true);
     const [openCheckout, setOpenCheckout] = useState(false);
 
     const { id } = useParams();
     const { handleSubmit, register } = useForm();
 
+    const categories = ["Celebração", "Adoração", "Oferta"];
+
     async function handleAddMusic(data) {
-        console.log(data);
+        const body = {
+            order: 0,
+            id_event: id,
+            id_music: data.id_music,
+            ...(data.id_category ? { id_category: data.id_category } : {})
+        };
+
+        try {
+            const res = await api.post('/event/music', body);
+            const newMusic = res.data
+
+            setData(prev => ({
+                ...prev,
+                event: {
+                    ...prev.event,
+                    musics: [
+                        ...prev.event.musics,
+                        newMusic
+                    ]
+                }
+            }))
+
+            console.log(res.data);
+        } catch (err) {
+            alert(err.response.data.message)
+        }
+    }
+
+    async function handleDeleteMusic(id) {
+
+        try {
+
+            await api.delete(`/event/music/${id}`)
+
+            const listMusics = data.event.musics.filter((music) => music.id !== id);
+
+            setData(prev => ({
+                ...prev,
+                event: {
+                    ...prev.event,
+                    musics: listMusics
+                }
+            }))
+
+        } catch (err) {
+            alert(err.response.data.message);
+        }
+
     }
 
     function handleSelectLouvor(e) {
         const id = e.target.value
-       
+
         const SelectMusic = data.musics.find((music) => music.id === id);
-        
-        if(SelectMusic.Categories.name === 'Celebração'){
+
+        if (SelectMusic.Categories.name === 'Celebração') {
             setOpenCheckout(true)
-        }else{
+        } else {
             setOpenCheckout(false);
         }
     }
@@ -67,6 +118,8 @@ export default function UpdateEvent() {
     }, [])
 
     if (loading) { return <h1>Carregando informacoes</h1> }
+
+
 
     return (
         <>
@@ -114,6 +167,32 @@ export default function UpdateEvent() {
                         <RiAddLargeLine size={40} />
                     </button>
                 </FormAddMusic>
+
+                <ListMusics>
+                    {categories.map((category) => (
+                        data.event.musics
+                            .filter((music) => music.category.name === category)
+                            .map((music) => {
+                                return (
+                                    <div key={music.id}>
+                                        <a href={`https://www.youtube.com/watch?v=${music.id_youtube}`} target="_blank">
+                                            {music.name}
+                                        </a>
+                                        <span>
+                                            <p>{music.category.name}</p>
+                                            <button
+                                                type="button"
+                                                onClick={() => handleDeleteMusic(music.id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </span>
+                                    </div>
+                                )
+                            })
+                    ))}
+
+                </ListMusics>
             </Container>
         </>
     )

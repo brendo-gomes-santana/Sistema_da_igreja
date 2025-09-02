@@ -6,3 +6,7 @@ export const createMusicEventSchema = z.object({
     id_music: z.uuid(),
     id_category: z.uuid().optional()
 })
+
+export const DeleteMusicEventShema = z.object({
+    id: z.uuid()
+})
