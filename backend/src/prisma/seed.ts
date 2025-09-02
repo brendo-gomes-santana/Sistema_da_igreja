@@ -4,13 +4,17 @@ import { hashSync } from 'bcryptjs';
 async function main() {
     await Promise.all([
 
-        prisma.users.create({
-            data: {
+        // Usa upsert para evitar duplicações
+        prisma.users.upsert({
+            where: { email: process.env.EMAIL as string },
+            update: {}, // não atualiza se já existir
+            create: {
                 email: process.env.EMAIL as string,
                 name: process.env.NAME as string,
                 password: hashSync(process.env.PASSWORD as string, 10)
             }
         }),
+
         prisma.categories.createMany({
             data: [
                 { name: "Adoração" },
@@ -19,6 +23,7 @@ async function main() {
             ],
             skipDuplicates: true,
         }),
+
         prisma.types.createMany({
             data: [
                 { name: "Guitarra" },
@@ -35,8 +40,7 @@ async function main() {
             ],
             skipDuplicates: true,
         })
-    ])
-
+    ]);
 }
 
 main()
