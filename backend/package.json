@@ -5,7 +5,7 @@
   "main": "serve.ts",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build" : "tsc",
+    "build": "tsup src",
     "start": "node dist/server.js"
   },
   "prisma": {
@@ -25,6 +25,7 @@
     "fastify-type-provider-zod": "^5.0.3",
     "prisma": "^6.14.0",
     "qrcode-terminal": "^0.12.0",
+    "tsup": "^8.5.0",
     "whatsapp-web.js": "^1.32.0",
     "zod": "^4.1.0"
   },
