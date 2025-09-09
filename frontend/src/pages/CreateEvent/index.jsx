@@ -6,6 +6,8 @@ import Header from '../../components/header'
 import Title from '../../components/Title';
 import api from '../../api';
 
+import PageLoading from '../../components/PageLoading';
+
 import {
     Form,
     ContainerAddLevites,
@@ -154,7 +156,7 @@ export default function CreateEvent() {
         }
     }
 
-    if (loadingPage) { return <p>Carregando Informacoes</p> }
+    if (loadingPage) { return <PageLoading/> }
 
     return (
         <>

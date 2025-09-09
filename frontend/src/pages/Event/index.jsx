@@ -9,6 +9,8 @@ import api from "../../api";
 import iconYoutube from '../../assets/icon_youtube.png'
 import iconCifra from '../../assets/icon_cifraClub.png'
 
+import PageLoading from "../../components/PageLoading";
+
 import {
     Cards,
     List
@@ -34,7 +36,7 @@ export default function Event() {
         })()
     }, [])
 
-    if (loading) { return <p>Carregando Informaçoes...</p> }
+    if (loading) { return <PageLoading/> }
 
     return (
         <>

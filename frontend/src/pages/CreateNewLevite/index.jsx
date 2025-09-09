@@ -5,6 +5,8 @@ import { Container } from "../../styled.global"
 import Title from "../../components/Title"
 import api from "../../api"
 
+import PageLoading from "../../components/PageLoading"
+
 import {
     Form,
     ContainerCheckbox
@@ -16,6 +18,8 @@ export default function CreateNewLevite() {
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
 
+    const [loadingPage, setLoadingPage] = useState(true);
+
     useEffect(() => {
         (async () => {
             try {
@@ -25,6 +29,8 @@ export default function CreateNewLevite() {
             } catch (err) {
                 alert(err.response.data.message);
             }
+
+            setLoadingPage(false)
         })()
     }, [])
 
@@ -59,6 +65,8 @@ export default function CreateNewLevite() {
     
         
     }
+
+    if(loadingPage) { return <PageLoading/> }
 
     return (
         <>

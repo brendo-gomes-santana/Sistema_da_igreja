@@ -9,7 +9,7 @@ export default function PageLoading({ title }){
     return(
         <Container>
             <span id="loader"></span>
-            <p>{title}</p>
+            <p>{title || 'Carregando informação...'}</p>
         </Container>
     )
 }

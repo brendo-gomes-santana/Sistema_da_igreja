@@ -15,7 +15,7 @@ export const Card = styled.div`
         display: flex;
         justify-content: flex-start;
         gap: 1em;
-
+        flex-wrap: wrap;
         p{
             color: ${props => props.theme.CinnamonBrown};
             border: 1px solid ${props => props.theme.CinnamonBrown};
@@ -39,5 +39,14 @@ export const Card = styled.div`
         border-bottom: 1px solid ${props => props.theme.CinnamonBrown};
     }
 
+    @media (max-width: 768px){
+       flex-direction: column;
+       gap: 1em;
+
+        #container-types{
+            align-items: center;
+            justify-content: center;
+        }
+    }
 
 `;

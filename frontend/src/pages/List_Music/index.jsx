@@ -12,6 +12,8 @@ import iconCifra from '../../assets/icon_cifraClub.png'
 
 import Auth from '../../components/Auth';
 
+import PageLoading from '../../components/PageLoading';
+
 import {
     Form,
     Card,
@@ -67,7 +69,7 @@ export default function ListMusic() {
     }, [searchParams])
 
     if (loading) {
-        return <h1>Carregando informações dos louvores...</h1>
+        return <PageLoading/>
     }
 
     return (

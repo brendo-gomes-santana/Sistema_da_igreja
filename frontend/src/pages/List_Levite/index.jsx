@@ -7,6 +7,8 @@ import Auth from '../../components/Auth';
 import { Container } from '../../styled.global';
 import api from '../../api';
 
+import PageLoading from '../../components/PageLoading'
+
 import {
 
     Card
@@ -30,7 +32,7 @@ export default function ListLevite() {
         })()
     }, [])
 
-    if (loading) { return <h1>Carregando informacoes dos levitas...</h1> }
+    if (loading) { return <PageLoading/> }
 
     return (
         <>

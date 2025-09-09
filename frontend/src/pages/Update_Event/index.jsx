@@ -8,6 +8,8 @@ import Header from "../../components/header"
 import Title from "../../components/Title"
 import api from "../../api"
 
+import PageLoading from "../../components/PageLoading";
+
 import {
     FormAddMusic,
     ListMusics
@@ -117,7 +119,7 @@ export default function UpdateEvent() {
         })()
     }, [])
 
-    if (loading) { return <h1>Carregando informacoes</h1> }
+    if (loading) { return <PageLoading/> }
 
 
 

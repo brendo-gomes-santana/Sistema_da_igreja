@@ -9,6 +9,8 @@ import api from '../../api';
 
 import image_Cifra from "../../assets/icon_cifraClub.png"
 
+import PageLoading from '../../components/PageLoading';
+
 import {
     ContainerMusic,
     ContainerLinks
@@ -36,7 +38,7 @@ export default function DetailMusic() {
         })()
     }, [])
 
-    if (loading) { return <h1>Carregando Musica...</h1> }
+    if (loading) { return <PageLoading/> }
 
     return (
         <>

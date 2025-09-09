@@ -11,6 +11,8 @@ import iconYoutube from '../../assets/icon_youtube.png'
 import iconCifra from '../../assets/icon_cifraClub.png'
 import iconLetras from '../../assets/icon_letras.png'
 
+import PageLoading from '../../components/PageLoading'
+
 import {
     Form,
     SearchYoutube,
@@ -78,7 +80,7 @@ export default function CreateMusic() {
     }, [])
 
 
-    if (loading) { return <h1>Carregando informacoes</h1> }
+    if (loading) { return <PageLoading/> }
 
 
     return (

@@ -8,6 +8,8 @@ import api from '../../api'
 import Header from '../../components/header'
 import Title from '../../components/Title'
 
+import PageLoading from '../../components/PageLoading';
+
 import {
     CreateLink
 } from './styled'
@@ -139,7 +141,7 @@ export default function UpdateMusic() {
         })()
     }, [id])
 
-    if (loading) { return <h1>Carregando informacoes...</h1> }
+    if (loading) { return <PageLoading/> }
     
     return (
         <>
