@@ -18,7 +18,7 @@ export default async function CreateEventServer(props: Props, id: string) {
                     data: props.levitas.map(item => ({
                         id_levite: item.id_levite,
                         id_type: item.id_type
-                    }))
+                    })) || []
                 }
             },
             Events_Musics: {

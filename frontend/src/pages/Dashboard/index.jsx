@@ -23,13 +23,13 @@ export default function Dashboard() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    async function handleSendWhatsApp(id){
-        try{
+    async function handleSendWhatsApp(id) {
+        try {
 
             await api.post(`/send-whatsapp/${id}`);
             alert('Mensagem enviado com sucesso')
 
-        }catch(err){
+        } catch (err) {
             alert(err.response.data.message)
         }
     }
@@ -48,7 +48,7 @@ export default function Dashboard() {
             }
         })()
     }, [])
-    if(loading) { return <PageLoading title="Carregando informações" /> }
+    if (loading) { return <PageLoading title="Carregando informações" /> }
     return (
         <>
             <Header name="Escalas" />
@@ -68,15 +68,19 @@ export default function Dashboard() {
                                     <h2>{item.name}</h2>
                                 </Link>
                                 <div>
-                                    <Link to={`/atualizar/evento/${item.id}`}>
-                                        <MdEditSquare size={50} />
-                                    </Link>
-                                    <button onClick={()=> handleSendWhatsApp(item.id)}>
-                                        <FaSquareWhatsapp size={50} color="#4BF289"/>
-                                    </button>
-                                    <button onClick={() => { console.log('testo') }}>
-                                        <RiDeleteBinFill size={50} color="#F57065"/>
-                                    </button>
+                                    <Auth>
+                                        <Link to={`/atualizar/evento/${item.id}`}>
+                                            <MdEditSquare size={50} />
+                                        </Link>
+                                        <button onClick={() => handleSendWhatsApp(item.id)}>
+                                            <FaSquareWhatsapp size={50} color="#4BF289" />
+                                        </button>
+                                        <button onClick={() => { console.log('testo') }}>
+                                            <RiDeleteBinFill size={50} color="#F57065" />
+                                        </button>
+                                    </Auth>
+
+
                                 </div>
                             </Card>
                         )

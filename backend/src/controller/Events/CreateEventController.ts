@@ -21,6 +21,8 @@ export default async function CreateEventController(
         return reply.status(200).send(Create)
 
     } catch (err) {
+
+
         return reply.status(401).send({
             message: err instanceof Error ? err.message : "Error create the event"
         });

@@ -30,7 +30,7 @@ export default function CreateEvent() {
 
     const categories = ["Celebração", "Adoração", "Oferta"];
 
-    const { handleSubmit, register } = useForm();
+    const { handleSubmit, register, reset } = useForm();
     
     useEffect(() => {
         (async () => {
@@ -148,6 +148,7 @@ export default function CreateEvent() {
         try{
             const res = await api.post('/event', body);
             console.log(res.data);
+            reset()
         }catch(err){
             alert(err.response.data.message)
         }
